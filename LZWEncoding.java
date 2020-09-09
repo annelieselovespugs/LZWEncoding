@@ -54,8 +54,8 @@ public class LZWEncoding{
 			//but let's have it for the sake of keeping code clean and not having to add variables over and over
 			//though then again, it could be easier to just always add them because we're doing a ton of adding later
 		String previousCharacter = "";
-		String currentCharacter = fileToEncode.charAt(0);
-		String previousPlusCurrent = previousCharacter + currentCharacter;
+		String currentCharacter = String.valueOf(fileToEncode.charAt(0));
+		String previousPlusCurrent = previousCharacter + currentCharacter; //looks iffy? no it doesn't?
 
 
 		//--------------------------------------------------------------------------------------
@@ -65,7 +65,7 @@ public class LZWEncoding{
 			//a sorting algorithm could be nice but skip it if speed doesn't matter
 				//isn't .sort(list) a thing?
 			//IF FOUND
-				//P = concatination(P,C) (which means previous = previous + current ?)
+				//P = concatination(P,C) (which means previous = previous + current ?) concatenation
 
 			//IF NOT FOUND:
 				//"output the code which denotes P to the codestream" (which means yeet it into the encodedValues array ?)
