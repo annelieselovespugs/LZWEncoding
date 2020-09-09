@@ -1,0 +1,2 @@
+# LZWEncoding
+ A cool project
