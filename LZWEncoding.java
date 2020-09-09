@@ -56,8 +56,19 @@ public class LZWEncoding{
 		String previousCharacter = "";
 		String currentCharacter = String.valueOf(fileToEncode.charAt(0));
 		String previousPlusCurrent = previousCharacter + currentCharacter; //looks iffy? no it doesn't?
-
-
+		for(int k=0; k<fileToEncode.length();k++) {
+		//if not found
+		if(!theDictionary.contains(previousPlusCurrent)) {
+			theDictionary.add(previousPlusCurrent);
+			if(previousCharacter.length()==1) {
+				encodedValues.add((int)previousCharacter.charAt(0));
+			}
+			else{
+				encodedValues.add(theDictionary.indexOf(previousCharacter)+256);
+			}
+		}
+		}
+		
 		//--------------------------------------------------------------------------------------
 
 
@@ -71,10 +82,8 @@ public class LZWEncoding{
 				//"output the code which denotes P to the codestream" (which means yeet it into the encodedValues array ?)
 				//add the string concatination(previous + current) to the dictionary
 				//set previous = current
-		int placeInDictionary = 0;
-		while ((placeInDictionary != theDictionary.size()) && ((previousCharacter + currentCharacter) != theDictionary.get(placeInDictionary))){
-			
-		}
+	
+		
 
 	}
 }
