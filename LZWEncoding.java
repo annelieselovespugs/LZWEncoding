@@ -54,19 +54,28 @@ public class LZWEncoding{
 			//but let's have it for the sake of keeping code clean and not having to add variables over and over
 			//though then again, it could be easier to just always add them because we're doing a ton of adding later
 		String previousCharacter = "";
-		String currentCharacter = String.valueOf(fileToEncode.charAt(0));
-		String previousPlusCurrent = previousCharacter + currentCharacter; //looks iffy? no it doesn't?
-		for(int k=0; k<fileToEncode.length();k++) {
-		//if not found
-		if(!theDictionary.contains(previousPlusCurrent)) {
-			theDictionary.add(previousPlusCurrent);
-			if(previousCharacter.length()==1) {
-				encodedValues.add((int)previousCharacter.charAt(0));
+		String currentCharacter = "";
+		String previousPlusCurrent = ""; 
+		for(int k=0; k<fileToEncode.length(); k++) {
+			currentCharacter = String.valueOf(fileToEncode.charAt(k));
+			previousPlusCurrent = previousCharacter + currentCharacter;
+			
+			//if not found
+			if(!theDictionary.contains(previousPlusCurrent)) {
+				theDictionary.add(previousPlusCurrent);
+				if(previousCharacter.length()==1) {
+					encodedValues.add((int)previousCharacter.charAt(0));
+				}
+				else{
+					encodedValues.add(theDictionary.indexOf(previousCharacter)+256);
+				}
+				previousCharacter = currentCharacter;
 			}
-			else{
-				encodedValues.add(theDictionary.indexOf(previousCharacter)+256);
+			
+			//if found
+			else {
+				previousCharacter = previousCharacter + currentCharacter;
 			}
-		}
 		}
 		
 		//--------------------------------------------------------------------------------------
