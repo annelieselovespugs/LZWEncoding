@@ -1,3 +1,16 @@
+ab
+bc
+ca
+abc
+cab
+bca
+abca
+abcab
+bcab
+bcabc
+cabc
+cabca
+abcabc
 97
 98
 99
