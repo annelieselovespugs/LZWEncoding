@@ -96,6 +96,16 @@ public class LZWEncoding{
 			encodedValues.add(theDictionary.indexOf(currentCharacter)+256);
 		}
 
+		try {
+			FileWriter writeToFile = new FileWriter("output.txt");
+			for (int i = 0; i < encodedValues.size(); i++){
+				writeToFile.write(encodedValues.get(i) + "\n");
+			}
+			writeToFile.close();
+		}
+		catch (IOException e) {
+			System.out.println("Uh oh :(");
+		}
 		
 		//--------------------------------------------------------------------------------------
 
