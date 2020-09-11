@@ -13,6 +13,7 @@
 import java.util.*;
 import java.io.*;
 
+
 public class LZWEncoding{
 	public static void main (String[] args){
 		//read in a txt file and dump it into a string
@@ -95,6 +96,21 @@ public class LZWEncoding{
 		else if (previousCharacter.length() > 1){
 			encodedValues.add(theDictionary.indexOf(currentCharacter)+256);
 		}
+
+
+		
+
+		try {
+			FileWriter writeToFile = new FileWriter("output.txt");
+			for (i = 0; i < encodedValues.size(); i++){
+				writeToFile.write(encodedValues.get(i) + "\n")
+			}
+			writeToFile.close();
+		    } 
+		catch (IOException e) {
+			System.out.println("Uh oh :(");
+		}
+
 
 		
 		//--------------------------------------------------------------------------------------
