@@ -60,23 +60,42 @@ public class LZWEncoding{
 			currentCharacter = String.valueOf(fileToEncode.charAt(k));
 			previousPlusCurrent = previousCharacter + currentCharacter;
 			
+			//if found
+			if(theDictionary.contains(previousPlusCurrent)) {
+				previousCharacter = previousCharacter + currentCharacter;
+			}
+
 			//if not found
-			if(!theDictionary.contains(previousPlusCurrent)) {
-				theDictionary.add(previousPlusCurrent);
+			else {
+				//the below if statement is to avoid adding single characters ("a", "b", "c", etc.) to the dictionary
+				if (previousPlusCurrent.length() > 1){
+					//System.out.println("Adding to dict: " + previousPlusCurrent);
+					theDictionary.add(previousPlusCurrent);
+				}
+				//System.out.println("PC Length: " + previousCharacter.length());
+
 				if(previousCharacter.length()==1) {
+					//System.out.println("Adding to encoded values: " + (char)previousCharacter.charAt(0));
 					encodedValues.add((int)previousCharacter.charAt(0));
 				}
-				else{
+
+				else if (previousCharacter.length() > 1){ //there was a problem in which the previous character would be added to the dictionary if it was "". "" has length 0, so the "if length() > 1" eliminates the problem
+					//System.out.println("Adding to encoded values uwu: " + (int)(theDictionary.indexOf(previousCharacter)));
 					encodedValues.add(theDictionary.indexOf(previousCharacter)+256);
 				}
 				previousCharacter = currentCharacter;
 			}
-			
-			//if found
-			else {
-				previousCharacter = previousCharacter + currentCharacter;
-			}
 		}
+
+		//adding on the last current character so we don't lose it
+		if(currentCharacter.length()==1) {
+			encodedValues.add((int)currentCharacter.charAt(0));
+		}
+
+		else if (previousCharacter.length() > 1){
+			encodedValues.add(theDictionary.indexOf(currentCharacter)+256);
+		}
+
 		
 		//--------------------------------------------------------------------------------------
 
