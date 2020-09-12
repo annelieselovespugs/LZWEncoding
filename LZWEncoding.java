@@ -69,7 +69,7 @@ public class LZWEncoding{
 			//if not found
 			else {
 				//the below if statement is to avoid adding single characters ("a", "b", "c", etc.) to the dictionary
-				if ((previousPlusCurrent.length() > 1) && theDictionary.size() < 256){
+				if ((previousPlusCurrent.length() > 1) && (theDictionary.size() < 256)){
 					//System.out.println("Adding to dict: " + previousPlusCurrent);
 					theDictionary.add(previousPlusCurrent);
 				}
