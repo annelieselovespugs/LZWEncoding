@@ -102,8 +102,13 @@ public class LZWEncoding{
 
 		try {
 			FileWriter writeToFile = new FileWriter("output.txt");
-			for (i = 0; i < encodedValues.size(); i++){
-				writeToFile.write(encodedValues.get(i) + "\n")
+			for (int i = 0; i < theDictionary.size (); i++)
+			{
+				writeToFile.write(theDictionary.get(i) + "\n");
+			}
+			writeToFile.write ("\n");
+			for (int i = 0; i < encodedValues.size(); i++){
+				writeToFile.write(encodedValues.get(i) + "\n");
 			}
 			writeToFile.close();
 		    } 
