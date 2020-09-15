@@ -102,10 +102,6 @@ public class LZWEncoding{
 
 		try {
 			FileWriter writeToFile = new FileWriter("output.txt");
-<<<<<<< Updated upstream
-			for (i = 0; i < encodedValues.size(); i++){
-				writeToFile.write(encodedValues.get(i) + "\n")
-=======
 			for (int i = 0; i < theDictionary.size (); i++)
 			{
 				writeToFile.write(theDictionary.get(i) + "\n");
@@ -113,7 +109,6 @@ public class LZWEncoding{
 			writeToFile.write ("\n");
 			for (int i = 0; i < encodedValues.size(); i++){
 				writeToFile.write(encodedValues.get(i) + "\n");
->>>>>>> Stashed changes
 			}
 			writeToFile.close();
 		    } 
