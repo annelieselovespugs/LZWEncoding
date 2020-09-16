@@ -1,4 +1,5 @@
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -22,36 +23,23 @@ public class Decoder
 			String letter = "" + (char)i;
 			decodingDictionary.add(letter);
 		}
-
-		//read in the file to decode (assuming the file starts w the dictionary
-		BufferedReader br = new BufferedReader(new FileReader(fileName));
-
-		//stores the int value of the current character
-		int currentCharacterInt = br.read();
-
-		//stores the phrase (set of chars) being read in
-		String currentPhrase = "";
-
-		//read through the file until you hit two returns/new lines in a row
-		while (currentCharacterInt != 10 || !currentPhrase.equals(""))
+		
+		//creates a scanner to scan in the dictionary and encoded file 
+		Scanner scanner = new Scanner (new File (fileName)); 
+		
+		//This String keeps track of which letter we're on to ensure we only scan in the dictionary at first 
+		String current = " "; 
+		
+		while (!current.equals (""))
 		{
-			//if there's a new line (and currentPhrase isn't empty), add the current phrase to the
-			//next index of the dictionary array list
-			if (currentCharacterInt == 10)
-			{
-				decodingDictionary.add(currentPhrase);
-				currentPhrase = "";
-			}
-			//if it's not a new line, add the current character to the current phrase
-			else
-			{
-				currentPhrase += (char)(currentCharacterInt);
-
-			}
-
-			//read in the next character + make that the current character
-			currentCharacterInt = br.read();
+			current = scanner.nextLine (); 
+			decodingDictionary.add(current); 
 		}
+		
+		//This line removes the blank String from the dictionary that was used to separate the dictionary and encoded values 
+		decodingDictionary.remove(decodingDictionary.size () -1); 
+		
+		System.out.println (decodingDictionary); 
 	}
 }
 
