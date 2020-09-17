@@ -56,7 +56,7 @@ public class LZWDecoder {
 		file.write(decodingDictionary.get(past));
 		
 				
-		while (br.ready())
+		while (br.ready() && decodingDictionary.size() < 10000)
 		{
 			//read in the next number using the same method i described above (just copy pasted)
 			num = "";
