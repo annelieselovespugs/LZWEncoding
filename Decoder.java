@@ -2,7 +2,6 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.*;
 
@@ -39,17 +38,8 @@ public class Decoder
 		
 		//This line removes the blank String from the dictionary that was used to separate the dictionary and encoded values 
 		decodingDictionary.remove(decodingDictionary.size () -1); 
-				
-		FileWriter writer = new FileWriter ("decodedCode.txt"); 
 		
-		//scans the next line, converts to int, the gets String at the index of the int and prints it to decodedCode.txt
-		while (scanner.hasNextLine())
-		{
-			int index = Integer.parseInt(scanner.nextLine ());
-			writer.write (decodingDictionary.get (index)); 
-		}
-		scanner.close();
-		writer.close();
+		System.out.println (decodingDictionary); 
 	}
 }
 
