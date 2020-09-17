@@ -31,7 +31,7 @@ public class Decoder
 		//This String keeps track of which letter we're on to ensure we only scan in the dictionary at first 
 		String current = " "; 
 		
-		while (!current.equals (""))
+		while (!current.equals ("end of dictionary"))
 		{
 			current = scanner.nextLine (); 
 			decodingDictionary.add(current); 

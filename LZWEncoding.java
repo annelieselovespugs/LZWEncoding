@@ -102,7 +102,7 @@ public class LZWEncoding{
 			{
 				writeToFile.write(theDictionary.get(i) + "\n");
 			}
-			writeToFile.write("\n");
+			writeToFile.write("end of dictionary\n");
 			for (int i = 0; i < encodedValues.size(); i++){
 				writeToFile.write(encodedValues.get(i) + "\n");
 			}
