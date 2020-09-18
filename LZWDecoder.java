@@ -103,5 +103,8 @@ public class LZWDecoder {
 		
 		//close the buffered reader
 		br.close();
+		
+		//
+		file.close();
 	}
 }
