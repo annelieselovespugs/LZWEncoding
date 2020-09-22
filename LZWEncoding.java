@@ -50,9 +50,7 @@ public class LZWEncoding{
 		ArrayList<Integer> encodedValues = new ArrayList<Integer>();
 
 		//set up 3 word variables: previous character, current character, and previous + current character
-			//the third variable is probably optional because it's just (previous + current)
-			//but let's have it for the sake of keeping code clean and not having to add variables over and over
-			//though then again, it could be easier to just always add them because we're doing a ton of adding later
+			
 		String previousCharacter = "";
 		String currentCharacter = "";
 		String previousPlusCurrent = ""; 
@@ -61,26 +59,22 @@ public class LZWEncoding{
 			previousPlusCurrent = previousCharacter + currentCharacter;
 			
 			//if found
-			if(theDictionary.contains(previousPlusCurrent)) {
+			if(previousPlusCurrent.length () == 1 || theDictionary.contains(previousPlusCurrent)) {
 				previousCharacter = previousCharacter + currentCharacter;
 			}
 
 			//if not found
 			else {
-				//the below if statement is to avoid adding single characters ("a", "b", "c", etc.) to the dictionary
-				if (previousPlusCurrent.length() > 1){
-					//System.out.println("Adding to dict: " + previousPlusCurrent);
-					theDictionary.add(previousPlusCurrent);
-				}
-				//System.out.println("PC Length: " + previousCharacter.length());
-
+				
+				//adds P+C to dictionary 
+				theDictionary.add(previousPlusCurrent);
+			
+				//output code for previousCharacter to the code stream 
 				if(previousCharacter.length()==1) {
-					//System.out.println("Adding to encoded values: " + (char)previousCharacter.charAt(0));
 					encodedValues.add((int)previousCharacter.charAt(0));
 				}
 
 				else if (previousCharacter.length() > 1){ //there was a problem in which the previous character would be added to the dictionary if it was "". "" has length 0, so the "if length() > 1" eliminates the problem
-					//System.out.println("Adding to encoded values uwu: " + (int)(theDictionary.indexOf(previousCharacter)));
 					encodedValues.add(theDictionary.indexOf(previousCharacter)+256);
 				}
 				previousCharacter = currentCharacter;
@@ -99,11 +93,6 @@ public class LZWEncoding{
 		try {
 			FileWriter writeToFile = new FileWriter("output.txt");
 			
-			/*for (int i = 0; i < theDictionary.size (); i++)
-			{
-				writeToFile.write(theDictionary.get(i) + "\n");
-			}
-			writeToFile.write("\n");*/
 			for (int i = 0; i < encodedValues.size(); i++){
 				writeToFile.write(encodedValues.get(i) + "\n");
 			}
