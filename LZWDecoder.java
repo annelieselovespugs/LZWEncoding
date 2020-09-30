@@ -44,7 +44,7 @@ public class LZWDecoder {
 			//read in the next character
 		int currentChar = br.read();
 			//continue reading until you hit a line break (indicating the number is over)
-		while (currentChar!=10)
+		while (currentChar!= 10)
 		{
 			num += (char)(currentChar);
 			currentChar = br.read();

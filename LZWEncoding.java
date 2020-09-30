@@ -1,15 +1,93 @@
 //Maya Doyle and Anneliese Ardizzone
-//LZW Compression
-/*Is the string P + C present in the dictionary?
-    - If it is:    
-          - P = concat(P,C);
-    - if Not:    
-           - output the code word which denotes P to the codestream
-           - add the string P+C) to the dictionary
-           - P = C 
-*/
+//Optimized by Jasmine Wang and Sally Ho
 
 
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.*;
+
+public class LZWEncoding{
+	public static void main (String[] args){
+		//read in a txt file and dump it into a string
+		Scanner keyboard = new Scanner(System.in);
+		System.out.print ("Please give me the name of the file you wish to encode: ");
+		String theFileName = keyboard.nextLine();
+
+
+
+		try {
+			//reading in a text file and creating print writer
+			FileReader fr = new FileReader (theFileName);
+			BufferedReader br = new BufferedReader(fr);
+			PrintWriter pw = new PrintWriter ("encoded.txt");
+			String previousCharacter = ""+(char)(br.read());
+			
+			//create a hashmap as the dictionary that will hold all additional entries after 255
+			HashMap <String, String> theDictionary = new HashMap<String, String>();
+
+			//counter will keep track of what the code for each new entry should be
+			int counter = 256;
+			while (br.ready())	
+			{
+				String currentCharacter = ""+ (char)br.read();
+				String previousPlusCurrent = previousCharacter+currentCharacter;
+				
+				//if previousCurrent is already in the theDictionary or if it's in the ascii table, update previous
+				if (theDictionary.containsKey(previousPlusCurrent) || previousPlusCurrent.length() == 1)
+				{
+					previousCharacter = previousPlusCurrent;
+				}
+				//print out value for previous character
+				else
+				{
+					//print previous character if it's a single character
+					if (previousCharacter.length()==1)
+					{
+						pw.print((int)previousCharacter.charAt(0) + "\n");
+					}
+					//print previous if it's not a single character
+					else 
+					{
+						pw.print(theDictionary.get(previousCharacter) + "\n");
+					}
+					//add previous + current to dictionary 
+					if (theDictionary.size()<=1000)
+					{
+					
+						theDictionary.put(previousPlusCurrent, ""+counter);
+						counter++;
+					}
+					previousCharacter= "" + currentCharacter;
+				}
+			}
+			
+			//edge case for last entry 
+			if (previousCharacter.length() == 1 )
+			{
+				pw.print((int)previousCharacter.charAt(0)+ "\n");
+			}
+			else
+			{
+				pw.print(theDictionary.get(previousCharacter) + "\n");
+			}
+			pw.close();
+			br.close();
+			fr.close();
+		}
+
+			catch (IOException e)
+			{
+				System.out.println ("can't read");
+			}
+	}
+}
+		
+		
+
+/*
 import java.util.*;
 import java.io.*;
 
@@ -91,7 +169,7 @@ public class LZWEncoding{
 		}
 
 		try {
-			FileWriter writeToFile = new FileWriter("output.txt");
+			FileWriter writeToFile = new FileWriter("output1.txt");
 			
 			for (int i = 0; i < encodedValues.size(); i++){
 				writeToFile.write(encodedValues.get(i) + "\n");
@@ -120,3 +198,4 @@ public class LZWEncoding{
 
 	}
 }
+*/
