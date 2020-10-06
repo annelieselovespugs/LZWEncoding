@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.*;
 
+
 public class LZWEncoding{
 	public static void main (String[] args){
 		//read in a txt file and dump it into a string
@@ -77,5 +78,31 @@ public class LZWEncoding{
 		catch (IOException error){
 			System.out.println ("can't read");
 		}
+try {
+			FileWriter writeToFile = new FileWriter("output.txt");
+			for (i = 0; i < encodedValues.size(); i++){
+				writeToFile.write(encodedValues.get(i) + "\n")
+			}
+			writeToFile.close();
+		    } 
+		catch (IOException e) {
+			System.out.println("Uh oh :(");
+		}
+
+
+		
+		//--------------------------------------------------------------------------------------
+
+
+		//Look for (previous + current) in the dictionary
+			//a sorting algorithm could be nice but skip it if speed doesn't matter
+				//isn't .sort(list) a thing?
+			//IF FOUND
+				//P = concatination(P,C) (which means previous = previous + current ?) concatenation
+
+			//IF NOT FOUND:
+				//"output the code which denotes P to the codestream" (which means yeet it into the encodedValues array ?)
+				//add the string concatination(previous + current) to the dictionary
+				//set previous = current
 	}
 }
